@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
+import GeneSearch from './components/GeneSearch';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello World!</h1>
-        <p>
-          Welcome to Omics Full Stack Application
-        </p>
+        <h1>Gene Expression Search</h1>
       </header>
+      <main>
+        <GeneSearch />
+      </main>
     </div>
   );
 }
