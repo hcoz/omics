@@ -16,11 +16,12 @@ const GeneSearch = () => {
     const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/expression`;
 
     try {
-      const response = await axios.post(apiUrl, {
-        geneIDs
+      const response = await axios.get(apiUrl, {
+        params: { geneIDs }
       });
       setGeneData(response.data);
     } catch (err) {
+      console.error('Error details:', err);
       setError(err.response?.data?.error || 'An error occurred');
     } finally {
       setLoading(false);
@@ -52,12 +53,12 @@ const GeneSearch = () => {
               <tr>
                 <th>Gene</th>
                 <th>Transcript</th>
-                <th>Exp Rep1</th>
-                <th>Exp Rep2</th>
-                <th>Exp Rep3</th>
-                <th>Ctrl Rep1</th>
-                <th>Ctrl Rep2</th>
-                <th>Ctrl Rep3</th>
+                <th>Exper Rep1</th>
+                <th>Exper Rep2</th>
+                <th>Exper Rep3</th>
+                <th>Control Rep1</th>
+                <th>Control Rep2</th>
+                <th>Control Rep3</th>
               </tr>
             </thead>
             <tbody>
@@ -71,6 +72,7 @@ const GeneSearch = () => {
                   <td>{gene.control_rep1}</td>
                   <td>{gene.control_rep2}</td>
                   <td>{gene.control_rep3}</td>
+                  <td><button>Analyze</button></td>
                 </tr>
               ))}
             </tbody>

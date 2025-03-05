@@ -131,3 +131,7 @@ dist
 
 # SQLite DB file
 *.sqlite
+
+# Environment files
+.env*
+!.env.example

@@ -3,9 +3,9 @@ const router = express.Router();
 const { Op } = require('sequelize');
 const GeneExpression = require('../models/GeneExpression');
 
-router.post('/expression', async (req, res) => {
+router.get('/expression', async (req, res) => {
   try {
-    const { geneIDs } = req.body;
+    const { geneIDs } = req.query;
     
     // Input validation
     if (!geneIDs) {
@@ -29,14 +29,14 @@ router.post('/expression', async (req, res) => {
     // Query database
     const expressions = await GeneExpression.findAll({
       where: {
-        geneID: {
+        gene: {
           [Op.in]: geneIDs
         }
       }
     });
 
     // Handle non-existent genes
-    const foundGenes = expressions.map(exp => exp.geneID);
+    const foundGenes = expressions.map(exp => exp.gene);
     const missingGenes = geneIDs.filter(id => !foundGenes.includes(id));
 
     // Prepare response
@@ -50,7 +50,7 @@ router.post('/expression', async (req, res) => {
     };
 
     if (missingGenes.length > 0) {
-      response.warning = `${missingGenes.length} genes not found in database`;
+      response.warning = `${missingGenes.join(', ')} gene${missingGenes.length > 1 ? 's' : ''} not found in database`;
     }
 
     res.json(response);

@@ -4,7 +4,8 @@ const sequelize = require('../config/database');
 const GeneExpression = sequelize.define('GeneExpression', {
   gene: {
     type: DataTypes.TEXT,
-    allowNull: true
+    primaryKey: true,
+    allowNull: false
   },
   transcript: {
     type: DataTypes.TEXT,
