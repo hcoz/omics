@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const sequelize = require('./config/database');
 const app = express();
 
 // CORS configuration
@@ -12,6 +13,11 @@ app.use(cors({
 
 // Rest of your server configuration...
 app.use(express.json());
+
+// Database sync
+sequelize.sync()
+  .then(() => console.log('Database connected'))
+  .catch(err => console.error('Database connection error:', err));
 
 // Your routes here...
 
