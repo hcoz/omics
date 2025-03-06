@@ -129,9 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# SQLite DB file
-*.sqlite
-
 # Environment files
 .env*
-!.env.example
+!.env.example*

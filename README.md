@@ -38,9 +38,21 @@ git clone <repository-url>
 cd omics
 ```
 
-2. Start the application using Docker Compose:
+2. Rename env sample files by deleting .example part
+```
+.env.example.development => .env.development
+.env.example.production => .env.production
+```
+
+3. Start the application using Docker Compose:
 ```bash
 docker-compose up --build
+```
+
+If you want to run in production mode, add the NODE_ENV parameter at the beginning.
+As the default mode is development, you can omit this for development mode.
+```bash
+NODE_ENV=production docker-compose up --build
 ```
 
 This will:
@@ -83,6 +95,7 @@ npm start
 - `FRONTEND_URL`: Frontend URL for CORS
 
 ### Frontend
+- `REACT_APP_ENV`: Environment mode
 - `REACT_APP_BACKEND_URL`: Backend API URL
 
 ## Development

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const GeneExpression = sequelize.define('GeneExpression', {
-  gene: {
+  geneId: {
     type: DataTypes.TEXT,
     primaryKey: true,
     allowNull: false

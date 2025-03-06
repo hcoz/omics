@@ -68,4 +68,32 @@ th {
 
 tr:nth-child(even) {
   background-color: #f9f9f9;
+}
+
+.stats {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.stats-tables {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.stats-tables table {
+  width: auto;
+  min-width: 200px;
+}
+
+.stats-tables h4 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.stats-tables td:first-child {
+  font-weight: bold;
+  padding-right: 20px;
 } 
