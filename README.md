@@ -5,10 +5,11 @@ A dockerized full-stack application with Express.js backend and React frontend.
 ## Prerequisites
 
 - Docker and Docker Compose installed on your machine
-- Node.js (>= 20)
+- Node.js (>= 18)
 - Git
 
 ## Project Structure
+```
 omics/
 ├── backend/
 │ ├── Dockerfile
@@ -20,12 +21,11 @@ omics/
 │ └── src/
 ├── docker-compose.yml
 └── README.md
+```
 
 ## Configuration
 
-The application is configured to run on the following domains:
-- Frontend: https://y.xyz.com (Port 3000)
-- Backend: https://x.xyz.com (Port 8080)
+You can configure Frontend and Backend URLs with corresponding params on .env files as described below
 
 ## Installation & Running
 
@@ -34,7 +34,7 @@ The application is configured to run on the following domains:
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/hcoz/omics.git
 cd omics
 ```
 
@@ -54,12 +54,6 @@ As the default mode is development, you can omit this for development mode.
 ```bash
 NODE_ENV=production docker-compose up --build
 ```
-
-This will:
-- Build both frontend and backend containers
-- Start the services
-- Set up the network between containers
-- Mount volumes for development
 
 ### Local Development
 
@@ -92,7 +86,6 @@ npm start
 ### Backend
 - `PORT`: Server port (default: 8080)
 - `NODE_ENV`: Environment mode
-- `FRONTEND_URL`: Frontend URL for CORS
 
 ### Frontend
 - `REACT_APP_ENV`: Environment mode
@@ -106,9 +99,8 @@ npm start
 ## Production Deployment
 
 1. Update the domain names in:
-   - docker-compose.yml
-   - backend/server.js
-   - frontend/.env (create if needed)
+   - backend/.env.production
+   - frontend/.env.production
 
 2. Set up SSL certificates for your domains
 
