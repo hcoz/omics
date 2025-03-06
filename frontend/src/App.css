@@ -163,4 +163,21 @@ tr:nth-child(even) {
   .stats-tables {
     flex-direction: column;
   }
-} 
+}
+
+.chart-container {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gene-chart {
+  max-height: 300px;
+  width: 100%;
+}
+
+.modal-content {
+  max-width: 800px;
+}

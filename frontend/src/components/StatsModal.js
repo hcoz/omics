@@ -1,4 +1,5 @@
 import React from 'react';
+import GeneChart from './GeneChart';
 
 const StatsModal = ({ statsData, onClose }) => {
   if (!statsData) return null;
@@ -7,9 +8,14 @@ const StatsModal = ({ statsData, onClose }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <h3>Statistics for {statsData.geneId}</h3>
+          <h3>Analysis for {statsData.geneId}</h3>
           <button className="close-button" onClick={onClose}>&times;</button>
         </div>
+        
+        <div className="chart-container">
+          <GeneChart geneData={statsData.geneRawData} />
+        </div>
+
         <div className="stats-tables">
           <div>
             <h4>Experimental Samples</h4>

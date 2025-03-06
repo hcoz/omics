@@ -12,7 +12,9 @@ const GeneSearch = () => {
   const handleAnalyze = async (geneId) => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/stats/${geneId}`);
-      setStatsData(response.data);
+      const geneRawData = geneData.data.find(gene => gene.geneId === geneId);
+
+      setStatsData({ ...response.data, geneRawData});
     } catch (err) {
       console.error('Error analyzing gene:', err);
       setError(err.response?.data?.error || 'Analysis failed');
@@ -25,10 +27,9 @@ const GeneSearch = () => {
     setError(null);
 
     const geneIDs = geneInput.split(/[\s,]+/).filter(id => id.trim());
-    const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/expression`;
 
     try {
-      const response = await axios.get(apiUrl, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/expression`, {
         params: { geneIDs }
       });
       setGeneData(response.data);
