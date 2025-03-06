@@ -1,5 +1,6 @@
 import React from 'react';
-import GeneChart from './GeneChart';
+import LineChart from './LineChart';
+import BoxPlot from './BoxPlot';
 
 const StatsModal = ({ statsData, onClose }) => {
   if (!statsData) return null;
@@ -11,9 +12,16 @@ const StatsModal = ({ statsData, onClose }) => {
           <h3>Analysis for {statsData.geneId}</h3>
           <button className="close-button" onClick={onClose}>&times;</button>
         </div>
-        
-        <div className="chart-container">
-          <GeneChart geneData={statsData.geneRawData} />
+
+        <div className="charts-container">
+          <div className="chart-wrapper">
+            <h4>Expression Values Over Replicates</h4>
+            <LineChart geneData={statsData.geneRawData} />
+          </div>
+          <div className="chart-wrapper">
+            <h4>Distribution Analysis</h4>
+            <BoxPlot statsData={statsData} />
+          </div>
         </div>
 
         <div className="stats-tables">

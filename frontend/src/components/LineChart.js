@@ -21,7 +21,7 @@ ChartJS.register(
   Legend
 );
 
-const GeneChart = ({ geneData }) => {
+const LineChart = ({ geneData }) => {
   const labels = ['Rep1', 'Rep2', 'Rep3'];
   
   const data = {
@@ -38,8 +38,8 @@ const GeneChart = ({ geneData }) => {
         data: [geneData.control_rep1, geneData.control_rep2, geneData.control_rep3],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
+      }
+    ]
   };
 
   const options = {
@@ -51,7 +51,7 @@ const GeneChart = ({ geneData }) => {
       title: {
         display: true,
         text: `Expression Values for ${geneData.geneId}`,
-      },
+      }
     },
     scales: {
       y: {
@@ -71,4 +71,4 @@ const GeneChart = ({ geneData }) => {
   );
 };
 
-export default GeneChart;
+export default LineChart;
