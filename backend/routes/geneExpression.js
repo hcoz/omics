@@ -129,7 +129,7 @@ router.get('/anomaly/:geneId', async (req, res) => {
       });
     }
 
-    // Get all values since 3 sample is not necessary for outliner detect
+    // Get all values since 3 samples are not sufficient for outliner detection
     const values = [
       gene.exper_rep1,
       gene.exper_rep2,
