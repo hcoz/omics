@@ -1,0 +1,20 @@
+FROM node:18-alpine
+
+WORKDIR /app/frontend
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+# Build the React app for production
+RUN npm run build
+
+# Serve the built app using a static server (e.g., serve)
+RUN npm install -g serve
+
+# Expose the frontend port
+EXPOSE 80
+
+CMD ["serve", "-s", "build", "-l", "80"]

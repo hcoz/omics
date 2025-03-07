@@ -2,12 +2,12 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: DockerfileDev
+      dockerfile: DockerfileProd
     ports:
       - "8080:8080"
     environment:
       - NODE_ENV=development
-      - FRONTEND_URL=http://localhost:3000
+      - FRONTEND_URL=http://y.xyz.com
     volumes:
       - ./backend:/app/backend
       - /app/backend/node_modules
@@ -17,12 +17,12 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: DockerfileDev
+      dockerfile: DockerfileProd
     ports:
-      - "3000:3000"
+      - "80:80"
     environment:
       - REACT_APP_ENV=development
-      - REACT_APP_BACKEND_URL=http://localhost:8080
+      - REACT_APP_BACKEND_URL=http://x.xyz.com
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./frontend:/app/frontend

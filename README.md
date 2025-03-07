@@ -1,6 +1,6 @@
 # Omics Full Stack Application
 
-A dockerized full-stack application with Express.js backend and React frontend.
+A dockerized full-stack application with Express.js backend and ReactJS frontend.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ omics/
 
 ## Configuration
 
-You can configure Frontend and Backend URLs with corresponding params on .env files as described below
+You can configure Frontend and Backend URLs with the related env params in the corresponding docker-compose files
 
 ## Installation & Running
 
@@ -38,47 +38,9 @@ git clone https://github.com/hcoz/omics.git
 cd omics
 ```
 
-2. Rename env sample files by deleting .example part
-```
-.env.example.development => .env.development
-.env.example.production => .env.production
-```
-
-3. Start the application using Docker Compose:
+2. Start the application using Docker Compose (As the default one is development, you don't need to specify compose file):
 ```bash
 docker-compose up --build
-```
-
-If you want to run in production mode, add the NODE_ENV parameter at the beginning.
-As the default mode is development, you can omit this for development mode.
-```bash
-NODE_ENV=production docker-compose up --build
-```
-
-### Local Development
-
-1. Install backend dependencies:
-```bash
-cd backend
-npm install
-```
-
-2. Install frontend dependencies:
-```bash
-cd frontend
-npm install
-```
-
-3. Start the backend server:
-```bash
-cd backend
-npm start
-```
-
-4. Start the frontend development server:
-```bash
-cd frontend
-npm start
 ```
 
 ## Environment Variables
@@ -86,6 +48,7 @@ npm start
 ### Backend
 - `PORT`: Server port (default: 8080)
 - `NODE_ENV`: Environment mode
+- `FRONTEND_URL`: Frontend URL
 
 ### Frontend
 - `REACT_APP_ENV`: Environment mode
@@ -98,13 +61,9 @@ npm start
 
 ## Production Deployment
 
-1. Update the domain names in:
-   - backend/.env.production
-   - frontend/.env.production
+1. Set up host file if necessary
 
-2. Set up SSL certificates for your domains
-
-3. Deploy using:
+2. Deploy using:
 ```bash
-docker-compose -f docker-compose.yml up -d
+docker-compose -f docker-compose.prod.yml up --build -d
 ```
