@@ -114,4 +114,47 @@ router.get('/stats/:geneId', async (req, res) => {
   }
 });
 
+// Gene anomaly detection with basic statistical approach endpoint
+router.get('/anomaly/:geneId', async (req, res) => {
+  try {
+    const { geneId } = req.params;
+    
+    const gene = await GeneExpression.findOne({
+      where: { geneId: geneId }
+    });
+
+    if (!gene) {
+      return res.status(404).json({
+        error: `Gene ${geneId} not found`
+      });
+    }
+
+    // Get all values since 3 sample is not necessary for outliner detect
+    const values = [
+      gene.exper_rep1,
+      gene.exper_rep2,
+      gene.exper_rep3,
+      gene.control_rep1,
+      gene.control_rep2,
+      gene.control_rep3
+    ].filter(val => val !== null);
+
+    // Calculate statistics
+    const stats = {
+      values: calculateStats(values),
+      geneId: geneId,
+      transcript: gene.transcript
+    };
+
+    res.json(stats);
+
+  } catch (error) {
+    console.error('Error calculating gene statistics:', error);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
+
 module.exports = router; 

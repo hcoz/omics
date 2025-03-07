@@ -19,22 +19,19 @@ ChartJS.register(
 );
 
 const BoxPlot = ({ statsData }) => {
-  const { experimental, control, geneRawData } = statsData;
+  const { values, geneRawData } = statsData;
 
-  const experimentalData = [
+  const rawData = [
     geneRawData.exper_rep1,
     geneRawData.exper_rep2,
-    geneRawData.exper_rep3
-  ].filter(val => val !== null);
-
-  const controlData = [
+    geneRawData.exper_rep3,
     geneRawData.control_rep1,
     geneRawData.control_rep2,
     geneRawData.control_rep3
   ].filter(val => val !== null);
 
   const data = {
-    labels: ['Experimental', 'Control'],
+    labels: ['Samples'],
     datasets: [{
       label: 'Expression Values',
       backgroundColor: ['rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)'],
@@ -43,27 +40,16 @@ const BoxPlot = ({ statsData }) => {
       outlierColor: '#ff0000',
       itemRadius: 4,
       outlierRadius: 6,
-      // data: [experimentalData, controlData]
       data: [
         {
-          min: experimental.min,
-          q1: experimental.q1,
-          median: experimental.median,
-          q3: experimental.q3,
-          max: experimental.max,
-          mean: experimental.mean,
-          outliers: experimental.outliers,
-          items: experimentalData
-        },
-        {
-          min: control.min,
-          q1: control.q1,
-          median: control.median,
-          q3: control.q3,
-          max: control.max,
-          mean: control.mean,
-          outliers: control.outliers,
-          items: controlData
+          min: values.min,
+          q1: values.q1,
+          median: values.median,
+          q3: values.q3,
+          max: values.max,
+          mean: values.mean,
+          outliers: values.outliers,
+          items: rawData
         }
       ]
     }]

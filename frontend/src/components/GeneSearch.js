@@ -7,6 +7,9 @@ const GeneSearch = () => {
   const [geneInput, setGeneInput] = useState('');
   const [geneData, setGeneData] = useState(null);
   const [statsData, setStatsData] = useState(null);
+  const [anomalyData, setAnomalyData] = useState(null);
+  const [statsMode, setStatsMode] = useState('stats');
+  const [displayStats, setDisplayStats] = useState(false);
   const [displayHeatmap, setDisplayHeatmap] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,6 +20,22 @@ const GeneSearch = () => {
       const geneRawData = geneData.data.find(gene => gene.geneId === geneId);
 
       setStatsData({ ...response.data, geneRawData });
+      setStatsMode('stats');
+      setDisplayStats(true);
+    } catch (err) {
+      console.error('Error analyzing gene:', err);
+      setError(err.response?.data?.error || 'Analysis failed');
+    }
+  };
+
+  const handleAnomaly = async (geneId) => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/anomaly/${geneId}`);
+      const geneRawData = geneData.data.find(gene => gene.geneId === geneId);
+
+      setAnomalyData({ ...response.data, geneRawData });
+      setStatsMode('anomaly');
+      setDisplayStats(true);
     } catch (err) {
       console.error('Error analyzing gene:', err);
       setError(err.response?.data?.error || 'Analysis failed');
@@ -93,6 +112,9 @@ const GeneSearch = () => {
                     <button onClick={() => handleAnalyze(gene.geneId)}>
                       Analyze
                     </button>
+                    <button onClick={() => handleAnomaly(gene.geneId)}>
+                      Anomaly
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -101,9 +123,17 @@ const GeneSearch = () => {
         </div>
       )}
 
-      <StatsModal statsData={statsData} onClose={() => setStatsData(null)} />
-      {displayHeatmap
-        && <HeatmapModal geneData={geneData.data} onClose={() => setDisplayHeatmap(false)} />}
+      {displayStats && (
+        <StatsModal
+          mode={statsMode}
+          onClose={() => setDisplayStats(false)}
+          statsData={statsData}
+          anomalyData={anomalyData}
+        />
+      )}
+      {displayHeatmap && (
+        <HeatmapModal geneData={geneData.data} onClose={() => setDisplayHeatmap(false)} />
+      )}
     </div>
   );
 };
