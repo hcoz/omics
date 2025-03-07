@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import StatsModal from './StatsModal';
+import HeatmapModal from './HeatmapModal';
 
 const GeneSearch = () => {
   const [geneInput, setGeneInput] = useState('');
   const [geneData, setGeneData] = useState(null);
   const [statsData, setStatsData] = useState(null);
+  const [displayHeatmap, setDisplayHeatmap] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +16,7 @@ const GeneSearch = () => {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/stats/${geneId}`);
       const geneRawData = geneData.data.find(gene => gene.geneId === geneId);
 
-      setStatsData({ ...response.data, geneRawData});
+      setStatsData({ ...response.data, geneRawData });
     } catch (err) {
       console.error('Error analyzing gene:', err);
       setError(err.response?.data?.error || 'Analysis failed');
@@ -56,10 +58,11 @@ const GeneSearch = () => {
       </form>
 
       {error && <div className="error">{error}</div>}
-      
+
       {geneData && (
         <div className="results">
           <h3>Results</h3>
+          <button onClick={() => setDisplayHeatmap(true)}>Display Heatmap</button>
           {geneData.warning && <p className="warning">{geneData.warning}</p>}
           <table>
             <thead>
@@ -99,6 +102,8 @@ const GeneSearch = () => {
       )}
 
       <StatsModal statsData={statsData} onClose={() => setStatsData(null)} />
+      {displayHeatmap
+        && <HeatmapModal geneData={geneData.data} onClose={() => setDisplayHeatmap(false)} />}
     </div>
   );
 };

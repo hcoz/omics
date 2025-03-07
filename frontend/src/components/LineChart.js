@@ -23,7 +23,7 @@ ChartJS.register(
 
 const LineChart = ({ geneData }) => {
   const labels = ['Rep1', 'Rep2', 'Rep3'];
-  
+
   const data = {
     labels,
     datasets: [
