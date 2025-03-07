@@ -149,7 +149,7 @@ router.get('/anomaly/:geneId', async (req, res) => {
     res.json(stats);
 
   } catch (error) {
-    console.error('Error calculating gene statistics:', error);
+    console.error('Error calculating gene anomalies:', error);
     res.status(500).json({
       error: 'Internal server error',
       message: process.env.NODE_ENV === 'development' ? error.message : undefined

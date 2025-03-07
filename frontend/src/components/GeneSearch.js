@@ -49,6 +49,12 @@ const GeneSearch = () => {
 
     const geneIDs = geneInput.split(/[\s,]+/).filter(id => id.trim());
 
+    if (geneIDs.length === 0) {
+      setError('Please enter at least one gene ID');
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/expression`, {
         params: { geneIDs }
@@ -81,7 +87,7 @@ const GeneSearch = () => {
       {geneData && (
         <div className="results">
           <h3>Results</h3>
-          <button onClick={() => setDisplayHeatmap(true)}>Display Heatmap</button>
+          <button className="action" onClick={() => setDisplayHeatmap(true)}>Display Heatmap</button>
           {geneData.warning && <p className="warning">{geneData.warning}</p>}
           <table>
             <thead>
@@ -109,10 +115,10 @@ const GeneSearch = () => {
                   <td>{gene.control_rep2}</td>
                   <td>{gene.control_rep3}</td>
                   <td>
-                    <button onClick={() => handleAnalyze(gene.geneId)}>
+                    <button className="action" onClick={() => handleAnalyze(gene.geneId)}>
                       Analyze
                     </button>
-                    <button onClick={() => handleAnomaly(gene.geneId)}>
+                    <button className="action" onClick={() => handleAnomaly(gene.geneId)}>
                       Anomaly
                     </button>
                   </td>

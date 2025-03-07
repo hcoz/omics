@@ -4,8 +4,8 @@ import GeneSearch from './components/GeneSearch';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="app">
+      <header className="app-header">
         <h1>Gene Expression Search</h1>
       </header>
       <main>

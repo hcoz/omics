@@ -5,6 +5,7 @@ A dockerized full-stack application with Express.js backend and ReactJS frontend
 ## Implementation Notes
 
 Anomaly detection is performed on both experimental and control values together, as 3 samples are not sufficient for outlier detection.
+Outliners are calculated using a basic statistical approach.
 
 The remaining analyses are performed separately for experimental and control groups.
 

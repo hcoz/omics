@@ -1,9 +1,9 @@
-.App {
+.app {
   text-align: center;
   padding: 20px;
 }
 
-.App-header {
+.app-header {
   background-color: #282c34;
   min-height: 2vh;
   display: flex;
@@ -48,9 +48,18 @@
   align-self: center;
 }
 
-.gene-search button[type="submit"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.gene-search button.action {
+  min-width: 100px;
+  min-height: 25px;
+  padding: 0 10px;
+  margin: 5px 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  align-self: center;
 }
 
 .error {
@@ -150,7 +159,7 @@ tr:nth-child(even) {
 }
 
 .close-button:hover {
-  color: #666;
+  background-color: #666;
 }
 
 .stats-tables {

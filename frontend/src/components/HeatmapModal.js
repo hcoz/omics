@@ -52,12 +52,20 @@ const HeatmapModal = ({ geneData, onClose }) => {
     ]
   };
 
+  const handleClose = (e) => {
+    // Close the modal only when the overlay or close button is clicked (not the modal itself)
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content">
         <div className="modal-header">
           <h3>Gene Expressions Heatmap</h3>
-          <button className="close-button" onClick={onClose}>&times;</button>
+          <button className="close-button" onClick={handleClose}>&times;</button>
         </div>
 
         <div className="charts-container">
